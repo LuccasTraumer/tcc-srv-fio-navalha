@@ -13,7 +13,7 @@ import java.util.List;
 public class ClienteVarejo extends Cliente {
     private BigDecimal saldoCarteira;
     private Double notaCliente;
-    private List<String> listaBarbeariasFavoritas;
+    private List<ClienteBarbearia> listaBarbeariasFavoritas;
     private List<String> comentarios;
     private Double reputacao;
     private List<String> listaServicoConsumidos;
