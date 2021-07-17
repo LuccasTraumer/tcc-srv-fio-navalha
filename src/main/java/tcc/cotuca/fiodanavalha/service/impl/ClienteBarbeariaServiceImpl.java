@@ -2,7 +2,6 @@ package tcc.cotuca.fiodanavalha.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 import tcc.cotuca.fiodanavalha.repository.ClienteBarbeariaRepository;
 import tcc.cotuca.fiodanavalha.service.ClienteBarbeariaService;
 import tcc.cotuca.fiodanavalha.to.ClienteBarbearia;
@@ -32,12 +31,7 @@ public class ClienteBarbeariaServiceImpl implements ClienteBarbeariaService {
 
     @Override
     public ClienteBarbearia editarBarbearia(ClienteBarbearia clienteBarbearia) {
-        Optional<ClienteBarbearia> barbearia = this.encontrarPorId(clienteBarbearia.getId());
-        if (barbearia.isPresent())
-            clienteBarbeariaRepository.save(barbearia.get());
-        else
-            throw new FioDaNavalhaException("Barbearia não encontrada!");
-        return barbearia.get();
+        return clienteBarbeariaRepository.save(clienteBarbearia);
     }
 
     @Override

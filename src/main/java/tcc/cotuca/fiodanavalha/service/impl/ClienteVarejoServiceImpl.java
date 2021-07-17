@@ -34,13 +34,7 @@ public class ClienteVarejoServiceImpl implements ClienteVarejoService {
 
     @Override
     public ClienteVarejo editarCliente(ClienteVarejo clienteVarejo) {
-        Optional<ClienteVarejo> editado = buscarPorId(clienteVarejo.getId());
-        if (editado.isPresent())
-            clienteVarejoRepository.save(clienteVarejo);
-        else
-            throw new FioDaNavalhaException("Cliente não encontrado para edita-lo");
-
-        return editado.get();
+        return clienteVarejoRepository.save(clienteVarejo);
     }
 
     @Override
