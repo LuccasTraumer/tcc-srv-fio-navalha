@@ -22,14 +22,6 @@ public class Corte {
         return ChronoUnit.HOURS.between(inicioCorte, fimCorte);
     }
 
-    public void avaliarConsumidor(final Double nota) {
-        this.consumidor.setNotaCliente(nota);
-    }
-
-    public void avaliarBarbearia(final Double nota) {
-        this.barbearia.setAvaliacaoBarbearia(nota);
-    }
-
     public void avaliarPrestadorServico(final String nome, final Double nota) {
         this.barbearia.getPrestadoresServico().forEach(prestadorServico -> {
             if(prestadorServico.getNome().equals(nome))

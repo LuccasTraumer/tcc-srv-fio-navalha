@@ -20,6 +20,7 @@ public class ClienteVarejo extends Cliente {
     private List<String> comentarios;
     private Double reputacao;
     private List<String> listaServicoConsumidos;
+    private PlanoContratado planoContratado;
 
     public ClienteVarejo() {
         this.saldoCarteira = new BigDecimal(0);
