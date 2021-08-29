@@ -1,14 +1,13 @@
 package tcc.cotuca.fiodanavalha;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import tcc.cotuca.fiodanavalha.repository.ClienteRepository;
+import tcc.cotuca.fiodanavalha.repository.ClienteVarejoRepository;
 
-@SpringBootApplication
-@EnableMongoRepositories(basePackageClasses = ClienteRepository.class)
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
+@EnableMongoRepositories(basePackageClasses = ClienteVarejoRepository.class)
 public class FioDaNavalhaApplication {
 
 	public static void main(String[] args) {
