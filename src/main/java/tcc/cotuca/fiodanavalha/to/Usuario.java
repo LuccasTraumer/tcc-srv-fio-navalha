@@ -2,6 +2,7 @@ package tcc.cotuca.fiodanavalha.to;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public abstract class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +31,7 @@ public abstract class Usuario {
     private String senha;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
+    private String descricao;
 
     public String getId() {
         return id;
@@ -116,5 +119,13 @@ public abstract class Usuario {
 
     public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 }
