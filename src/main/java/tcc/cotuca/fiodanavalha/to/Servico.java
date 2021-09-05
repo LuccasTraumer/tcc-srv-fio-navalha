@@ -11,9 +11,9 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @Data
 @AllArgsConstructor
-public class Corte {
-    private ClienteVarejo consumidor;
-    private ClienteBarbearia barbearia;
+public class Servico {
+    private Cliente consumidor;
+    private Barbearia barbearia;
     private LocalDateTime inicioCorte;
     private LocalDateTime fimCorte;
     private BigDecimal valorCorte;

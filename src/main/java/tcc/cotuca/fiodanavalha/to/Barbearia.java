@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Data
 @AllArgsConstructor
-public class ClienteBarbearia extends Cliente {
+public class Barbearia extends Usuario {
     private List<LocalDateTime> agendaDisponivel;
     private Double avaliacaoBarbearia;
     private List<String> enderecosBarbearia;
@@ -20,12 +20,12 @@ public class ClienteBarbearia extends Cliente {
     private Double precoMedio;
     private String descricao;
     private List<LocalDateTime> horarioFuncionamento;
-    private List<Corte> servicosRealizados;
+    private List<Servico> servicosRealizados;
     private List<String> comentariosSobre;
     private List<PlanoDisponibilizado> tiposPlanos;
     private List<PrestadorServico> prestadoresServico;
 
-    public ClienteBarbearia() {
+    public Barbearia() {
         this.agendaDisponivel = new ArrayList<>();
         this.avaliacaoBarbearia = 0.0;
         this.enderecosBarbearia = new ArrayList<>();

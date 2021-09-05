@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tcc.cotuca.fiodanavalha.repository.ClienteVarejoRepository;
-import tcc.cotuca.fiodanavalha.to.ClienteVarejo;
+import tcc.cotuca.fiodanavalha.to.Cliente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
-class ClienteVarejoServiceImplTest {
+class ClienteServiceImplTest {
 
     @InjectMocks
     private ClienteVarejoServiceImpl clienteVarejoService;
@@ -27,10 +27,10 @@ class ClienteVarejoServiceImplTest {
     @Mock
     private ClienteVarejoRepository clienteVarejoRepository;
 
-    private List<ClienteVarejo> clienteLista;
+    private List<Cliente> clienteLista;
 
     @Mock
-    private ClienteVarejo clienteVarejo;
+    private Cliente clienteVarejo;
 
 
     @BeforeEach
