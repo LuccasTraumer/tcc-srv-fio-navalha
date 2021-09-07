@@ -8,7 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tcc.cotuca.fiodanavalha.repository.ClienteBarbeariaRepository;
-import tcc.cotuca.fiodanavalha.to.ClienteBarbearia;
+import tcc.cotuca.fiodanavalha.to.Barbearia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +19,8 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ClienteBarbeariaServiceImplTest {
-    private List<ClienteBarbearia> barbeariaLista;
+class BarbeariaServiceImplTest {
+    private List<Barbearia> barbeariaLista;
 
     @InjectMocks
     private ClienteBarbeariaServiceImpl clienteBarbeariaService;
@@ -29,7 +29,7 @@ class ClienteBarbeariaServiceImplTest {
     private ClienteBarbeariaRepository clienteBarbeariaRepository;
 
     @Mock
-    private ClienteBarbearia clienteBarbearia;
+    private Barbearia clienteBarbearia;
 
 
     @BeforeEach
