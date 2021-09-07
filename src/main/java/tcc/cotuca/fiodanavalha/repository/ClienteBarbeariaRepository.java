@@ -1,7 +1,7 @@
 package tcc.cotuca.fiodanavalha.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import tcc.cotuca.fiodanavalha.to.ClienteBarbearia;
+import tcc.cotuca.fiodanavalha.to.Barbearia;
 
-public interface ClienteBarbeariaRepository extends MongoRepository<ClienteBarbearia, String> {
+public interface ClienteBarbeariaRepository extends MongoRepository<Barbearia, String> {
 }
