@@ -3,9 +3,12 @@ package tcc.cotuca.fiodanavalha.to;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
+import javax.persistence.Id;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,9 +19,12 @@ import java.time.temporal.ChronoUnit;
 @Data
 @AllArgsConstructor
 @ToString
-public class Servico {
-    private Cliente consumidor;
-    private Barbearia barbearia;
+public class Servico implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue
+    private String id;
     private String name;
     private LocalDate dataServico;
     private LocalDateTime inicioCorte;
@@ -29,10 +35,4 @@ public class Servico {
         return ChronoUnit.HOURS.between(inicioCorte, fimCorte);
     }
 
-    public void avaliarPrestadorServico(final String nome, final Double nota) {
-        this.barbearia.getPrestadoresServico().forEach(prestadorServico -> {
-            if(prestadorServico.getNome().equals(nome))
-                prestadorServico.setReputacao(nota);
-        });
-    }
 }

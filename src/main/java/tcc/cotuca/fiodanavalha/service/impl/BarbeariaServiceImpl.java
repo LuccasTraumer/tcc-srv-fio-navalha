@@ -2,40 +2,40 @@ package tcc.cotuca.fiodanavalha.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tcc.cotuca.fiodanavalha.repository.ClienteBarbeariaRepository;
-import tcc.cotuca.fiodanavalha.service.ClienteBarbeariaService;
+import tcc.cotuca.fiodanavalha.repository.BarbeariaRepository;
+import tcc.cotuca.fiodanavalha.service.BarbeariaService;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteBarbeariaServiceImpl implements ClienteBarbeariaService {
+public class BarbeariaServiceImpl implements BarbeariaService {
     @Autowired
-    private ClienteBarbeariaRepository clienteBarbeariaRepository;
+    private BarbeariaRepository barbeariaRepository;
 
     @Override
     public List<Barbearia> buscarTodasBarbearias() {
-        return clienteBarbeariaRepository.findAll();
+        return barbeariaRepository.findAll();
     }
 
     @Override
     public Optional<Barbearia> encontrarPorId(String id) {
-        return clienteBarbeariaRepository.findById(id);
+        return barbeariaRepository.findById(id);
     }
 
     @Override
     public Barbearia inserirBarbearia(Barbearia clienteVarejo) {
-        return clienteBarbeariaRepository.insert(clienteVarejo);
+        return barbeariaRepository.save(clienteVarejo);
     }
 
     @Override
     public Barbearia editarBarbearia(Barbearia clienteBarbearia) {
-        return clienteBarbeariaRepository.save(clienteBarbearia);
+        return barbeariaRepository.save(clienteBarbearia);
     }
 
     @Override
     public void deletarBarbearia(String id) {
-        clienteBarbeariaRepository.deleteById(id);
+        barbeariaRepository.deleteById(id);
     }
 }
