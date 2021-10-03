@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 TCC_database.sql
+Tabelas TCC.sql
 
 ### STS ###
 .apt_generated

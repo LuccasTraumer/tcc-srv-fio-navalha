@@ -18,10 +18,10 @@ import java.util.Map;
 @Component
 @Service
 public class CadastroService {
-    @Autowired
+//    @Autowired
     private ClienteService clienteService;
 
-    @Autowired
+//    @Autowired
     private BarbeariaService barbeariaService;
 
     Logger logger = LoggerFactory.getLogger(CadastroService.class);
