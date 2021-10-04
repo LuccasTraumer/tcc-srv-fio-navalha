@@ -29,4 +29,10 @@ public class CadastroController {
                                                         @NonNull @RequestBody final Barbearia barbearia) {
         return this.cadastroService.cadastrarBarbearia(headers, barbearia);
     }
+
+    @PostMapping(value = "cadastro-barbeiro")
+    public ResponseEntity<HttpStatus> cadastroBarbeiro(final Map<String, String> headers,
+                                                        @NonNull @RequestBody final Barbearia barbearia) {
+        return this.cadastroService.cadastrarBarbeiro(headers, barbearia);
+    }
 }
