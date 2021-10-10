@@ -14,23 +14,24 @@ import java.util.Map;
 
 @CrossOrigin
 @Controller
+@RequestMapping("cadastro")
 public class CadastroController {
     @Autowired
     private CadastroService cadastroService;
 
-    @PostMapping(value = "cadastro-cliente")
+    @PostMapping(value = "cliente")
     public ResponseEntity<HttpStatus> cadastroCliente(final Map<String, String> headers,
                                                       @NonNull @RequestBody final Cliente cliente) {
         return this.cadastroService.cadastrarCliente(headers, cliente);
     }
 
-    @PostMapping(value = "cadastro-barbearia")
+    @PostMapping(value = "barbearia")
     public ResponseEntity<HttpStatus> cadastroBarbearia(final Map<String, String> headers,
                                                         @NonNull @RequestBody final Barbearia barbearia) {
         return this.cadastroService.cadastrarBarbearia(headers, barbearia);
     }
 
-    @PostMapping(value = "cadastro-barbeiro")
+    @PostMapping(value = "barbeiro")
     public ResponseEntity<HttpStatus> cadastroBarbeiro(final Map<String, String> headers,
                                                         @NonNull @RequestBody final Barbearia barbearia) {
         return this.cadastroService.cadastrarBarbeiro(headers, barbearia);

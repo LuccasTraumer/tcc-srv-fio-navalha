@@ -2,6 +2,7 @@ package tcc.cotuca.fiodanavalha.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -13,14 +14,16 @@ import tcc.cotuca.fiodanavalha.to.Usuario;
 
 import java.util.Map;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 
 @Component
 @Service
 public class CadastroService {
-//    @Autowired
+    @Autowired
     private ClienteService clienteService;
 
-//    @Autowired
+    @Autowired
     private BarbeariaService barbeariaService;
 
     Logger logger = LoggerFactory.getLogger(CadastroService.class);
@@ -28,28 +31,30 @@ public class CadastroService {
     public ResponseEntity<HttpStatus> cadastrarCliente(Map<String, String> headers, Cliente cliente) {
         logger.info("Cadastrando Cliente {0}", cliente);
 
-//        if(!usuarioValido(cliente))
-//            throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
+        if(!usuarioValido(cliente))
+            throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        clienteService.inserirCliente(cliente);
+        return new ResponseEntity<>(CREATED);
     }
 
     public ResponseEntity<HttpStatus> cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
-//        if(!usuarioValido(barbearia))
-//            throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
+        if(!usuarioValido(barbearia))
+            throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        barbeariaService.inserirBarbearia(barbearia);
+        return new ResponseEntity<>(CREATED);
     }
 
     public ResponseEntity<HttpStatus> cadastrarBarbeiro(Map<String, String> headers, Barbearia barbearia) {
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
-//        if(!usuarioValido(barbearia))
-//            throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbearia + " Invalidos");
+        if(!usuarioValido(barbearia))
+            throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbearia + " Invalidos");
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(CREATED);
     }
 
     private boolean usuarioValido(Usuario usuario) {

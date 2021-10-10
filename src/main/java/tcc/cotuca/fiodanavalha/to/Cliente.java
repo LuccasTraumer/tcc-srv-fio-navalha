@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "cliente")
@@ -18,20 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class Cliente {
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue
-    private String id;
-    private String nome;
-    private String descricao;
-    private String cpfCnpj;
-    private String email;
-    private String telefone;
-    private String fotoPerfil;
-    private String senha;
-    private LocalDate dataNascimento;
-    private LocalDate dataCadastro;
+public class Cliente extends Usuario {
     private BigDecimal saldoCliente;
     private Double notaCliente;
     private Double reputacao;
