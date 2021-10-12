@@ -11,8 +11,7 @@ import tcc.cotuca.fiodanavalha.gateway.impl.ClienteGatewayImpl;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 
-import static sun.tools.jconsole.Messages.ERROR;
-import static sun.tools.jconsole.Messages.INFO;
+import static sun.tools.jconsole.Messages.*;
 
 @Component
 @Service
