@@ -1,16 +1,16 @@
-package tcc.cotuca.fiodanavalha.service.impl;
+package tcc.cotuca.fiodanavalha.gateway.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tcc.cotuca.fiodanavalha.repository.BarbeariaRepository;
-import tcc.cotuca.fiodanavalha.service.BarbeariaService;
+import tcc.cotuca.fiodanavalha.gateway.BarbeariaGateway;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BarbeariaServiceImpl implements BarbeariaService {
+public class BarbeariaGatewayImpl implements BarbeariaGateway {
     @Autowired
     private BarbeariaRepository barbeariaRepository;
 

@@ -1,16 +1,16 @@
-package tcc.cotuca.fiodanavalha.service.impl;
+package tcc.cotuca.fiodanavalha.gateway.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tcc.cotuca.fiodanavalha.repository.ClienteRepository;
-import tcc.cotuca.fiodanavalha.service.ClienteService;
+import tcc.cotuca.fiodanavalha.gateway.ClienteGateway;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClienteGatewayImpl implements ClienteGateway {
     @Autowired
     ClienteRepository clienteRepository;
 

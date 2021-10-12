@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.service.impl;
+package tcc.cotuca.fiodanavalha.gateway.impl;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,10 +19,10 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 @ExtendWith(MockitoExtension.class)
-class ClienteServiceImplTest {
+class ClienteGatewayImplTest {
 
     @InjectMocks
-    private ClienteServiceImpl clienteVarejoService;
+    private ClienteGatewayImpl clienteVarejoService;
 
     @Mock
     private ClienteRepository clienteRepository;

@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import tcc.cotuca.fiodanavalha.exception.CadastroInvalidoException;
+import tcc.cotuca.fiodanavalha.gateway.BarbeariaGateway;
+import tcc.cotuca.fiodanavalha.gateway.ClienteGateway;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 import tcc.cotuca.fiodanavalha.to.Usuario;
@@ -21,10 +23,10 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Service
 public class CadastroService {
     @Autowired
-    private ClienteService clienteService;
+    private ClienteGateway clienteGateway;
 
     @Autowired
-    private BarbeariaService barbeariaService;
+    private BarbeariaGateway barbeariaGateway;
 
     Logger logger = LoggerFactory.getLogger(CadastroService.class);
 
@@ -34,7 +36,7 @@ public class CadastroService {
         if(!usuarioValido(cliente))
             throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
 
-        clienteService.inserirCliente(cliente);
+        clienteGateway.inserirCliente(cliente);
         return new ResponseEntity<>(CREATED);
     }
 
@@ -44,7 +46,7 @@ public class CadastroService {
         if(!usuarioValido(barbearia))
             throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
 
-        barbeariaService.inserirBarbearia(barbearia);
+        barbeariaGateway.inserirBarbearia(barbearia);
         return new ResponseEntity<>(CREATED);
     }
 

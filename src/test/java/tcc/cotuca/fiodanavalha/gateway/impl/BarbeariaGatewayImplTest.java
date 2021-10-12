@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.service.impl;
+package tcc.cotuca.fiodanavalha.gateway.impl;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,11 +19,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class BarbeariaServiceImplTest {
+class BarbeariaGatewayImplTest {
     private List<Barbearia> barbeariaLista;
 
     @InjectMocks
-    private BarbeariaServiceImpl clienteBarbeariaService;
+    private BarbeariaGatewayImpl clienteBarbeariaService;
 
     @Mock
     private BarbeariaRepository barbeariaRepository;
