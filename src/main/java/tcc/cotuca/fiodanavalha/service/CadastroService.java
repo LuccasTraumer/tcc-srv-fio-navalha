@@ -30,14 +30,14 @@ public class CadastroService {
     @Autowired
     private BarbeariaGateway barbeariaGateway;
 
-    public ResponseEntity<HttpStatus> cadastrarCliente(Map<String, String> headers, Cliente cliente) {
+    public HttpStatus cadastrarCliente(Map<String, String> headers, Cliente cliente) {
         logger.info("Cadastrando Cliente {0}", cliente);
 
         if(!usuarioValido(cliente))
             throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
 
         clienteGateway.inserirCliente(cliente);
-        return new ResponseEntity<>(CREATED);
+        return CREATED;
     }
 
     public HttpStatus cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
@@ -50,13 +50,13 @@ public class CadastroService {
         return CREATED;
     }
 
-    public ResponseEntity<HttpStatus> cadastrarBarbeiro(Map<String, String> headers, Barbearia barbearia) {
+    public HttpStatus cadastrarBarbeiro(Map<String, String> headers, Barbearia barbearia) {
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
         if(!usuarioValido(barbearia))
             throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbearia + " Invalidos");
 
-        return new ResponseEntity<>(CREATED);
+        return CREATED;
     }
 
     private boolean usuarioValido(Usuario usuario) {
