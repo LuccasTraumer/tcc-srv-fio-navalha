@@ -28,7 +28,7 @@ public class CadastroController {
     @PostMapping(value = "barbearia")
     public ResponseEntity<HttpStatus> cadastroBarbearia(final Map<String, String> headers,
                                                         @NonNull @RequestBody final Barbearia barbearia) {
-        return this.cadastroService.cadastrarBarbearia(headers, barbearia);
+        return new ResponseEntity<>(this.cadastroService.cadastrarBarbearia(headers, barbearia));
     }
 
     @PostMapping(value = "barbeiro")

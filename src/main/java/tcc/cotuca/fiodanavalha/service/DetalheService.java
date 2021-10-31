@@ -11,7 +11,6 @@ import tcc.cotuca.fiodanavalha.gateway.impl.ClienteGatewayImpl;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 
-import static sun.tools.jconsole.Messages.*;
 
 @Component
 @Service
@@ -24,9 +23,11 @@ public class DetalheService {
     private BarbeariaGatewayImpl barbeariaGateway;
 
     public Cliente buscarDetalhesCliente(Cliente cliente) {
-        logger.info(INFO, "Cliente que esta efetuando consulta é: {0}", cliente);
+        logger.info("Cliente que esta efetuando consulta é: {0}", cliente);
         try {
-            return clienteGateway.buscarPorId(cliente.getId()).get();
+            System.out.println(cliente);
+//            return clienteGateway.buscarPorId(cliente.getId()).get();
+            return null;
         } catch (NullPointerException e) {
             throw new FioDaNavalhaException("Não foi possivel buscar por este Cliente!");
         } catch (Exception e) {
@@ -35,14 +36,14 @@ public class DetalheService {
     }
 
     public Barbearia buscarDetalhesBarbearia(Barbearia barbearia) {
-        logger.info(INFO, "Cliente que esta efetuando consulta é: {0}", barbearia);
+        logger.info("Cliente que esta efetuando consulta é: {0}", barbearia);
         try {
             return barbeariaGateway.encontrarPorId(barbearia.getId()).get();
         } catch (NullPointerException e) {
-            logger.error(ERROR, "Nullpointer ao tentar pegar cliente do Optional, mensagem: {0}", e.getMessage());
+//            logger.error(ERROR, "Nullpointer ao tentar pegar cliente do Optional, mensagem: {0}", e.getMessage());
             throw new FioDaNavalhaException("Não foi possivel buscar por esta Barbearia!");
         } catch (Exception e) {
-            logger.error(ERROR, "Erro generico ao tentar pegar cliente do Optional, mensagem: {0}", e.getMessage());
+//            logger.error(ERROR, "Erro generico ao tentar pegar cliente do Optional, mensagem: {0}", e.getMessage());
             throw new FioDaNavalhaException("Não foi possivel manter comunicação com Banco de Dados!");
         }
     }
