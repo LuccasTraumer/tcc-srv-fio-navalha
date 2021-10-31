@@ -10,10 +10,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import tcc.cotuca.fiodanavalha.exception.CadastroInvalidoException;
 import tcc.cotuca.fiodanavalha.service.CadastroService;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -24,8 +26,8 @@ class CadastroControllerTest {
     private static final String PATH_BARBEARIA = "/barbearia";
     private static final String PATH_CLIENTE = "/cliente";
     private static final String PATH_BARBEIRO = "/barbeiro";
-    private JSONObject parametros;
 
+    private JSONObject parametros;
     private final HttpHeaders headers = new HttpHeaders();
 
     @Autowired
@@ -54,8 +56,15 @@ class CadastroControllerTest {
     }
 
     @Test
+    @SneakyThrows
     void quandoCadastrarBarbearia_deveExecutarLancarExcecao() {
+        doThrow(CadastroInvalidoException.class).when(cadastroService).cadastrarBarbearia(any(), any());
 
+        mockMvc.perform(
+                post(PATH_CADASTRO + PATH_BARBEARIA)
+                        .headers(headers)
+                        .content(parametros.toString())
+        ).andExpect(status().isNotAcceptable());
     }
 
     @Test
@@ -71,8 +80,15 @@ class CadastroControllerTest {
     }
 
     @Test
+    @SneakyThrows
     void quandoCadastrarBarbeiro_deveExecutarLancarExcecao() {
+        doThrow(CadastroInvalidoException.class).when(cadastroService).cadastrarBarbeiro(any(), any());
 
+        mockMvc.perform(
+                post(PATH_CADASTRO + PATH_BARBEIRO)
+                        .headers(headers)
+                        .content(parametros.toString())
+        ).andExpect(status().isNotAcceptable());
     }
 
     @Test
@@ -88,7 +104,14 @@ class CadastroControllerTest {
     }
 
     @Test
+    @SneakyThrows
     void quandoCadastrarCliente_deveExecutarLancarExcecao() {
+        doThrow(CadastroInvalidoException.class).when(cadastroService).cadastrarCliente(any(), any());
 
+        mockMvc.perform(
+                post(PATH_CADASTRO + PATH_CLIENTE)
+                        .headers(headers)
+                        .content(parametros.toString())
+        ).andExpect(status().isNotAcceptable());
     }
 }
