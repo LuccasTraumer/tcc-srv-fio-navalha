@@ -1,43 +1,43 @@
-package tcc.cotuca.fiodanavalha.service.impl;
+package tcc.cotuca.fiodanavalha.gateway.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tcc.cotuca.fiodanavalha.repository.ClienteVarejoRepository;
-import tcc.cotuca.fiodanavalha.service.ClienteVarejoService;
+import tcc.cotuca.fiodanavalha.repository.ClienteRepository;
+import tcc.cotuca.fiodanavalha.gateway.ClienteGateway;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClienteVarejoServiceImpl implements ClienteVarejoService {
+public class ClienteGatewayImpl implements ClienteGateway {
     @Autowired
-    ClienteVarejoRepository clienteVarejoRepository;
+    ClienteRepository clienteRepository;
 
 
     @Override
     public List<Cliente> buscarTodosCliente() {
-        return clienteVarejoRepository.findAll();
+        return clienteRepository.findAll();
     }
 
     @Override
     public Optional<Cliente> buscarPorId(String id) {
-        return clienteVarejoRepository.findById(id);
+        return clienteRepository.findById(id);
     }
 
     @Override
     public Cliente inserirCliente(Cliente clienteVarejo) {
         System.out.println(clienteVarejo);
-        return clienteVarejoRepository.insert(clienteVarejo);
+        return clienteRepository.save(clienteVarejo);
     }
 
     @Override
     public Cliente editarCliente(Cliente clienteVarejo) {
-        return clienteVarejoRepository.save(clienteVarejo);
+        return clienteRepository.save(clienteVarejo);
     }
 
     @Override
     public void deletarCliente(String id) {
-        clienteVarejoRepository.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 }

@@ -1,10 +1,10 @@
-package tcc.cotuca.fiodanavalha.service;
+package tcc.cotuca.fiodanavalha.gateway;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import tcc.cotuca.fiodanavalha.service.CadastroService;
 
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class CadastroServiceTest {
 

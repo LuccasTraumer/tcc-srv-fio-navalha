@@ -3,35 +3,31 @@ package tcc.cotuca.fiodanavalha.to;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "usuario")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public abstract class Usuario {
+public abstract class Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private String id;
     private String nome;
+    private String descricao;
     private String cpfCnpj;
     private String email;
     private String telefone;
-    private String tipoCliente;
     private String fotoPerfil;
     private String senha;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
-    private String descricao;
 
     public String getId() {
         return id;
@@ -73,17 +69,6 @@ public abstract class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getTipoCliente() {
-        return tipoCliente;
-    }
-
-    public void setTipoCliente(String tipoCliente) {
-        if (tipoCliente.isEmpty() || tipoCliente.isBlank())
-            throw new FioDaNavalhaException("Tipo de Cliente informado é invalido!");
-        else
-            this.tipoCliente = tipoCliente;
     }
 
     public String getFotoPerfil() {
