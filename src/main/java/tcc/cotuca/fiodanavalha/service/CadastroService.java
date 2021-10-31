@@ -22,13 +22,13 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Component
 @Service
 public class CadastroService {
+    Logger logger = LoggerFactory.getLogger(CadastroService.class);
+
     @Autowired
     private ClienteGateway clienteGateway;
 
     @Autowired
     private BarbeariaGateway barbeariaGateway;
-
-    Logger logger = LoggerFactory.getLogger(CadastroService.class);
 
     public ResponseEntity<HttpStatus> cadastrarCliente(Map<String, String> headers, Cliente cliente) {
         logger.info("Cadastrando Cliente {0}", cliente);
@@ -40,14 +40,14 @@ public class CadastroService {
         return new ResponseEntity<>(CREATED);
     }
 
-    public ResponseEntity<HttpStatus> cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
+    public HttpStatus cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
         if(!usuarioValido(barbearia))
             throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
 
         barbeariaGateway.inserirBarbearia(barbearia);
-        return new ResponseEntity<>(CREATED);
+        return CREATED;
     }
 
     public ResponseEntity<HttpStatus> cadastrarBarbeiro(Map<String, String> headers, Barbearia barbearia) {
