@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.to;
+package tcc.cotuca.fiodanavalha.to.plano;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

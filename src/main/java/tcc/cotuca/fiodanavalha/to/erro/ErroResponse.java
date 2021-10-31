@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.to;
+package tcc.cotuca.fiodanavalha.to.erro;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;

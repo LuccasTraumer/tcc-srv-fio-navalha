@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.to;
+package tcc.cotuca.fiodanavalha.to.servico;
 
 public class ServicoSolicitado {
     private Integer idServico;
