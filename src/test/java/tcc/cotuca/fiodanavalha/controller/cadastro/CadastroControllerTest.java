@@ -43,6 +43,9 @@ class CadastroControllerTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
     }
 
+    //TODO: Deixar mais genericos os testes utilizando o Parametrid Test, pois os teste são iguais o que muda
+    // é o metodo que sera chamado
+
     @Test
     @SneakyThrows
     void quandoCadastrarBarbearia_deveExecutarComSucesso() {

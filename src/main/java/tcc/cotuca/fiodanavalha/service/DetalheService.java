@@ -27,7 +27,7 @@ public class DetalheService {
         try {
             System.out.println(cliente);
 //            return clienteGateway.buscarPorId(cliente.getId()).get();
-            return null;
+            return new Cliente();
         } catch (NullPointerException e) {
             throw new FioDaNavalhaException("Não foi possivel buscar por este Cliente!");
         } catch (Exception e) {
