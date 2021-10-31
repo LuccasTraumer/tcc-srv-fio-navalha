@@ -1,11 +1,11 @@
-package tcc.cotuca.fiodanavalha.service;
+package tcc.cotuca.fiodanavalha.gateway;
 
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface ClienteBarbeariaService {
+public interface BarbeariaGateway {
     List<Barbearia> buscarTodasBarbearias();
     Optional<Barbearia> encontrarPorId(String id);
     Barbearia inserirBarbearia(Barbearia clienteVarejo);
