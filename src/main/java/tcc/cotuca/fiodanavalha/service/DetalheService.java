@@ -38,7 +38,8 @@ public class DetalheService {
     public Barbearia buscarDetalhesBarbearia(Barbearia barbearia) {
         logger.info("Cliente que esta efetuando consulta é: {0}", barbearia);
         try {
-            return barbeariaGateway.encontrarPorId(barbearia.getId()).get();
+            return null;
+//            return barbeariaGateway.encontrarPorId(barbearia.getId()).get();
         } catch (NullPointerException e) {
 //            logger.error(ERROR, "Nullpointer ao tentar pegar cliente do Optional, mensagem: {0}", e.getMessage());
             throw new FioDaNavalhaException("Não foi possivel buscar por esta Barbearia!");

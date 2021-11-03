@@ -3,6 +3,9 @@ package tcc.cotuca.fiodanavalha.to;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 
@@ -10,27 +13,31 @@ import javax.persistence.GeneratedValue;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Entity
 public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String nome;
     private String descricao;
-    private String cpfCnpj;
     private String email;
     private String telefone;
-    private String fotoPerfil;
+    private Object fotoPerfil;
     private String senha;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
 
-    public String getId() {
-        return id;
+    public Long getId() {
+        Long clone = Long.valueOf(id);
+        return clone;
     }
 
     public String getNome() {
@@ -42,17 +49,6 @@ public abstract class Usuario implements Serializable {
             throw new FioDaNavalhaException("Nome informado é invalido!");
         else
             this.nome = nome;
-    }
-
-    public String getCpfCnpj() {
-        return cpfCnpj;
-    }
-
-    public void setCpfCnpj(String cpfCnpj) {
-        if (cpfCnpj.isEmpty() || cpfCnpj.isBlank())
-            throw new FioDaNavalhaException("Cpf/Cnpj informado é invalido!");
-        else
-            this.cpfCnpj = cpfCnpj;
     }
 
     public String getEmail() {
@@ -71,11 +67,11 @@ public abstract class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    public String getFotoPerfil() {
+    public Object getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(String fotoPerfil) {
+    public void setFotoPerfil(Object fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
 
@@ -112,5 +108,23 @@ public abstract class Usuario implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(getId(), usuario.getId()) && Objects.equals(getNome(), usuario.getNome()) && Objects.equals(getDescricao(), usuario.getDescricao()) && Objects.equals(getEmail(), usuario.getEmail()) && Objects.equals(getTelefone(), usuario.getTelefone()) && Objects.equals(getFotoPerfil(), usuario.getFotoPerfil()) && Objects.equals(getSenha(), usuario.getSenha()) && Objects.equals(getDataNascimento(), usuario.getDataNascimento()) && Objects.equals(getDataCadastro(), usuario.getDataCadastro());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getNome(), getDescricao(), getEmail(), getTelefone(), getFotoPerfil(), getSenha(), getDataNascimento(), getDataCadastro());
+    }
+
+    public void generatedId(Usuario usuario) {
+        if(id == null)
+            id = Long.valueOf(usuario.hashCode());
     }
 }

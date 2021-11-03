@@ -9,6 +9,7 @@ import tcc.cotuca.fiodanavalha.to.plano.PlanoContratado;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 @Table(name = "cliente")
@@ -22,12 +23,14 @@ public class Cliente extends Usuario {
     private Double reputacao;
     private PlanoContratado planoContratado;
     private Endereco endereco;
+    private String cpf;
 
     public Cliente() {
         this.saldoCliente = new BigDecimal(0);
         this.notaCliente = 0.0;
         this.reputacao = 0.0;
         this.endereco = new Endereco();
+        this.cpf = "";
     }
 
     public BigDecimal getSaldoCliente() {
@@ -68,5 +71,26 @@ public class Cliente extends Usuario {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cliente)) return false;
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(getSaldoCliente(), cliente.getSaldoCliente()) && Objects.equals(getNotaCliente(), cliente.getNotaCliente()) && Objects.equals(getReputacao(), cliente.getReputacao()) && Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) && Objects.equals(getEndereco(), cliente.getEndereco()) && Objects.equals(getCpf(), cliente.getCpf());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSaldoCliente(), getNotaCliente(), getReputacao(), getPlanoContratado(), getEndereco(), getCpf());
     }
 }

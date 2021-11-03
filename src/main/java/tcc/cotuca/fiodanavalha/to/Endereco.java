@@ -23,10 +23,11 @@ public class Endereco implements Serializable {
     @Id
     @GeneratedValue
     private String id;
-    private String rua;
+    private String logradouro;
     private String bairro;
-    private String numero;
-    private String cidade;
-    private String estado;
+    private String localidade;
+    private String uf;
     private String complemento;
+    private String cep;
+    private String numeroResidencia;
 }
