@@ -1,5 +1,7 @@
 package tcc.cotuca.fiodanavalha.controller.cadastro;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +17,12 @@ import java.util.Map;
 @CrossOrigin
 @Controller
 @RequestMapping("cadastro")
+@Api("Cadastro")
 public class CadastroController {
     @Autowired
     private CadastroService cadastroService;
 
+    @ApiOperation("Criação de um Cliente")
     @PostMapping(value = "cliente")
     public ResponseEntity<HttpStatus> cadastroCliente(final Map<String, String> headers,
                                                       @NonNull @RequestBody final Cliente cliente) {
