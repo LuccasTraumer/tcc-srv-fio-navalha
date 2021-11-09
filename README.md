@@ -21,4 +21,4 @@ Nome        | RA | LINKEDIN
 ------------|-----|---------
 Lucas Jesus | 19372| https://www.linkedin.com/in/lucassjesus/
 Pedro Otavio | 19382| https://www.linkedin.com/in/pedro-candido-445548199/
-Pedro Henrique | xxxxx| https://www.linkedin.com/in/pedro-henrique-114b111aa/
+Pedro Henrique | 20366| https://www.linkedin.com/in/pedro-henrique-114b111aa/
