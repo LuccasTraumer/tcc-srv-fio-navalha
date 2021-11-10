@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConig extends WebMvcConfigurationSupport{
+public class SwaggerConfig extends WebMvcConfigurationSupport{
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -25,8 +25,9 @@ public class SwaggerConig extends WebMvcConfigurationSupport{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("tcc-cotuca-fio-da-navalha")
-                .description("Microservico de Fornecimento de Dados")
+                .title("Fio da Navalha")
+                .description("Microservico de Fornecimento de Dados para o Projeto Fio da Navalha," +
+                        "que é um Projeto de TCC para o Colégop Técnico de Campinas - Unicamp")
                 .version("0.0.1-SNAPSHOT")
                 .build();
     }

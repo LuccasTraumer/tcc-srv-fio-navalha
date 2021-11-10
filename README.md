@@ -15,6 +15,9 @@ Endpoints presentes:
     - lista-barbearias | ***METHOD***: **GET**
     - lista-servicos-consumudos | ***METHOD***: **POST**
 
+Swagger UI:
+http://localhost:8080/swagger-ui.html
+
 ***Pensado, Implementado e testado por:***
 
 Nome        | RA | LINKEDIN
