@@ -4,19 +4,20 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "cabeleleiro")
+@Entity(name = "cabeleleiro")
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 public class Cabeleleiro implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCabeleleiro;
+
     private String name;
     private Double anosExperiencia;
     private Double reputacao;

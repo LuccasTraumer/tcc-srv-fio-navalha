@@ -37,7 +37,7 @@ public class CadastroService {
     private PasswordEncoder passwordEncoder;
 
     public HttpStatus cadastrarCliente(Map<String, String> headers, Cliente cliente) {
-        cliente.setSenha(passwordEncoder.encode(cliente.getPassword()));
+//        cliente.setSenha(passwordEncoder.encode(cliente.getPassword()));
         logger.info("Cadastrando Cliente {0}", cliente);
 
         if(!USUARIO_VALIDO(cliente))
@@ -50,7 +50,7 @@ public class CadastroService {
     }
 
     public HttpStatus cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
-        barbearia.setSenha(passwordEncoder.encode(barbearia.getPassword()));
+//        barbearia.setSenha(passwordEncoder.encode(barbearia.getPassword()));
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
         if(!USUARIO_VALIDO(barbearia))
@@ -63,7 +63,7 @@ public class CadastroService {
     }
 
     public HttpStatus cadastrarBarbeiro(Map<String, String> headers, Barbearia barbeiro) {
-        barbeiro.setSenha(passwordEncoder.encode(barbeiro.getPassword()));
+//        barbeiro.setSenha(passwordEncoder.encode(barbeiro.getPassword()));
         logger.info("Cadastrando Barbearia {0}", barbeiro);
 
         if(!USUARIO_VALIDO(barbeiro))

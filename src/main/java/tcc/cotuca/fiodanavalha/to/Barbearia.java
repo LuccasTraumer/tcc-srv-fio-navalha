@@ -3,25 +3,31 @@ package tcc.cotuca.fiodanavalha.to;
 import lombok.*;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
 
-@Entity
-@Table(name = "barbearia")
+@Entity(name = "barbearia")
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
 @Data
 public class Barbearia extends Usuario {
-    private List<Object> horariosDiponiveis;
-    private String especialidade;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(targetEntity = Cabeleleiro.class)
     private List<Cabeleleiro> listaCabeleleiro;
+
+    @ManyToOne(targetEntity = Endereco.class)
     private List<Endereco> enderecos;
+
+//    private List<Object> horariosDiponiveis;
+    private String especialidade;
     private Endereco endereco;
     private String cnpj;
 
@@ -36,7 +42,7 @@ public class Barbearia extends Usuario {
 
         this.enderecos = new ArrayList<>(barbearia.enderecos);
         this.listaCabeleleiro = new ArrayList<>(barbearia.listaCabeleleiro);
-        this.horariosDiponiveis = new ArrayList<>(barbearia.horariosDiponiveis);
+//        this.horariosDiponiveis = new ArrayList<>(barbearia.horariosDiponiveis);
     }
 
     @Override

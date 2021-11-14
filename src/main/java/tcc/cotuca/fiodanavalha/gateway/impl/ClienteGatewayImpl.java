@@ -43,11 +43,13 @@ public class ClienteGatewayImpl implements ClienteGateway {
 
     @Override
     public Optional<Cliente> buscarPorEmail(String email) {
-        return clienteRepository.findByEmail(email);
+//        return clienteRepository.findByEmail(email);
+        return null;
     }
 
     @Override
     public Optional<Cliente> buscarPorTelefone(String telefone) {
-        return clienteRepository.findByTelefone(telefone);
+//        return clienteRepository.findByTelefone(telefone);
+        return null;
     }
 }

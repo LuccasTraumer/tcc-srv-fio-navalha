@@ -33,7 +33,7 @@ public class LoginService {
     @Autowired
     private BarbeariaGatewayImpl barbeariaGateway;
 
-    public ResponseEntity<HttpStatus> efetuarLogin(UserRequest usuario) {
+    public ResponseEntity<HttpStatus> efetuarLogin(Usuario usuario) {
         logger.info("Usuario à efetuar Login: {}", usuario);
 
         var usuarioBancoDados = buscarUsuario(usuario);

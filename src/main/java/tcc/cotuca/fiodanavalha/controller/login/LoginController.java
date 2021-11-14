@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tcc.cotuca.fiodanavalha.service.LoginService;
+import tcc.cotuca.fiodanavalha.to.Usuario;
 import tcc.cotuca.fiodanavalha.to.login.UserRequest;
 
 
@@ -21,7 +22,7 @@ public class LoginController {
     private LoginService service;
 
     @PostMapping("login")
-    public ResponseEntity<HttpStatus> fazerLogin(@NonNull @RequestBody final UserRequest usuario) {
+    public ResponseEntity<HttpStatus> fazerLogin(@NonNull @RequestBody final Usuario usuario) {
 
         return service.efetuarLogin(usuario);
     }

@@ -7,15 +7,13 @@ import javax.persistence.Id;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-@Entity
-@Table(name = "servico")
+@Entity(name = "servico")
 @Data
 @AllArgsConstructor
 @ToString
@@ -25,7 +23,8 @@ public class Servico implements Serializable {
     @Id
     @GeneratedValue
     private String id;
-    private String name;
+
+    private String nome;
     private LocalDate dataServico;
     private LocalDateTime inicioCorte;
     private LocalDateTime fimCorte;

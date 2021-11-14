@@ -41,11 +41,13 @@ public class BarbeariaGatewayImpl implements BarbeariaGateway {
 
     @Override
     public Optional<Barbearia> buscarPorEmail(String email) {
-        return barbeariaRepository.findByEmail(email);
+//        return barbeariaRepository.findByEmail(email);
+        return null;
     }
 
     @Override
     public Optional<Barbearia> buscarPorTelefone(String telefone) {
-        return barbeariaRepository.findByTelefone(telefone);
+//        return barbeariaRepository.findByTelefone(telefone);
+        return null;
     }
 }

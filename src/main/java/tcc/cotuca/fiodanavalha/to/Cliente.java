@@ -6,21 +6,22 @@ import lombok.extern.slf4j.Slf4j;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 import tcc.cotuca.fiodanavalha.to.plano.PlanoContratado;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "cliente")
+@Entity(name = "cliente")
 @Slf4j
 @AllArgsConstructor
 @ToString
 public class Cliente extends Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private BigDecimal saldoCliente;
     private Double notaCliente;
     private Double reputacao;
-    private PlanoContratado planoContratado;
+//    private PlanoContratado planoContratado;
     private Endereco endereco;
     private String cpf;
 
@@ -61,13 +62,13 @@ public class Cliente extends Usuario {
         this.reputacao = reputacao;
     }
 
-    public PlanoContratado getPlanoContratado() {
-        return planoContratado;
-    }
+//    public PlanoContratado getPlanoContratado() {
+//        return planoContratado;
+//    }
 
-    public void setPlanoContratado(PlanoContratado planoContratado) {
-        this.planoContratado = planoContratado;
-    }
+//    public void setPlanoContratado(PlanoContratado planoContratado) {
+//        this.planoContratado = planoContratado;
+//    }
 
     public Endereco getEndereco() {
         return endereco;
@@ -94,15 +95,17 @@ public class Cliente extends Usuario {
                 getSaldoCliente(), cliente.getSaldoCliente()) &&
                 Objects.equals(getNotaCliente(), cliente.getNotaCliente()) &&
                 Objects.equals(getReputacao(), cliente.getReputacao()) &&
-                Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) &&
+//                Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) &&
                 Objects.equals(getEndereco(), cliente.getEndereco()) &&
                 Objects.equals(getCpf(), cliente.getCpf());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSaldoCliente(), getNotaCliente(),
-                        getReputacao(), getPlanoContratado(),
+        return Objects.hash(
+//                getPlanoContratado(),
+                getSaldoCliente(), getNotaCliente(),
+                        getReputacao(),
                         getEndereco(), getCpf());
     }
 
@@ -114,7 +117,7 @@ public class Cliente extends Usuario {
         this.saldoCliente = cliente.saldoCliente;
         this.notaCliente = cliente.notaCliente;
         this.reputacao = cliente.reputacao;
-        this.planoContratado = cliente.planoContratado;
+//        this.planoContratado = cliente.planoContratado;
         this.endereco = cliente.endereco;
         this.cpf = cliente.cpf;
 

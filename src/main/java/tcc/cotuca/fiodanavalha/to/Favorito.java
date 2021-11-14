@@ -11,15 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "favorito")
+@Entity(name = "favorito")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 public class Favorito {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private Cliente cliente;
     private Barbearia barbearia;
