@@ -11,7 +11,4 @@ public interface BarbeariaGateway {
     Barbearia inserirBarbearia(Barbearia clienteVarejo);
     Barbearia editarBarbearia(Barbearia clienteBarbearia);
     void deletarBarbearia(Long id);
-    Optional<Barbearia> buscarPorEmail(String email);
-    Optional<Barbearia> buscarPorTelefone(String telefone);
-
 }

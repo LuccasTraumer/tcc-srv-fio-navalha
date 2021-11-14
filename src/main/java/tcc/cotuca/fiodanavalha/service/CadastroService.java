@@ -4,17 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import tcc.cotuca.fiodanavalha.exception.CadastroInvalidoException;
 import tcc.cotuca.fiodanavalha.gateway.BarbeariaGateway;
 import tcc.cotuca.fiodanavalha.gateway.ClienteGateway;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
-import tcc.cotuca.fiodanavalha.to.Usuario;
 import static tcc.cotuca.fiodanavalha.utils.ValidarUsuario.*;
 
 import java.util.Map;

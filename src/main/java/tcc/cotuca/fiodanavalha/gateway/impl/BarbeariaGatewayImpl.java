@@ -38,14 +38,4 @@ public class BarbeariaGatewayImpl implements BarbeariaGateway {
     public void deletarBarbearia(Long id) {
         barbeariaRepository.deleteById(id);
     }
-
-    @Override
-    public Optional<Barbearia> buscarPorEmail(String email) {
-        return barbeariaRepository.findByEmail(email);
-    }
-
-    @Override
-    public Optional<Barbearia> buscarPorTelefone(String telefone) {
-        return barbeariaRepository.findByTelefone(telefone);
-    }
 }

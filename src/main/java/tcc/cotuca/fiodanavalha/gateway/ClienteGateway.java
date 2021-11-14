@@ -11,6 +11,4 @@ public interface ClienteGateway {
     Cliente inserirCliente(Cliente clienteVarejo);
     Cliente editarCliente(Cliente clienteVarejo);
     void deletarCliente(Long id);
-    Optional<Cliente> buscarPorEmail(String email);
-    Optional<Cliente> buscarPorTelefone(String telefone);
 }

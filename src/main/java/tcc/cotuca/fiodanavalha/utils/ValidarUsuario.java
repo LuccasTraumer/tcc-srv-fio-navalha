@@ -8,8 +8,10 @@ import java.time.LocalDate;
 
 public class ValidarUsuario {
 
+    private ValidarUsuario() {}
+
     public static boolean USUARIO_VALIDO(Usuario usuario) {
-        boolean isValid = true;
+        var isValid = false;
         if(usuario.getClass().equals(Cliente.class)) {
             isValid = ((Cliente) usuario).getSaldoCliente() != null &&
                     ((Cliente) usuario).getNotaCliente() != null &&
@@ -18,7 +20,7 @@ public class ValidarUsuario {
                     ((Cliente) usuario).getNome() != null &&
                     ((Cliente) usuario).getCpf() != null &&
                     (((Cliente) usuario).getEmail() != null ||
-                            ((Cliente) usuario).getTelefone() != null) &&
+                    ((Cliente) usuario).getTelefone() != null) &&
                     ((Cliente) usuario).getFotoPerfil() != null &&
                     ((Cliente) usuario).getSenha() != null &&
                     ((Cliente) usuario).getDataNascimento() != null;
@@ -27,7 +29,7 @@ public class ValidarUsuario {
                     ((Barbearia) usuario).getNome() != null &&
                     ((Barbearia) usuario).getCnpj() != null &&
                     (((Cliente) usuario).getEmail() != null ||
-                            ((Cliente) usuario).getTelefone() != null) &&
+                    ((Cliente) usuario).getTelefone() != null) &&
                     ((Barbearia) usuario).getFotoPerfil() != null &&
                     ((Barbearia) usuario).getSenha() != null &&
                     ((Barbearia) usuario).getDataNascimento()!= null;

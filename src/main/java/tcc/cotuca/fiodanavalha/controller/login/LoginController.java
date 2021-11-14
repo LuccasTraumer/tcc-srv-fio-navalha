@@ -22,7 +22,7 @@ public class LoginController {
     private LoginService service;
 
     @PostMapping("login")
-    public ResponseEntity<HttpStatus> fazerLogin(@NonNull @RequestBody final Usuario usuario) {
+    public ResponseEntity<HttpStatus> fazerLogin(@NonNull @RequestBody final UserRequest usuario) {
 
         return service.efetuarLogin(usuario);
     }

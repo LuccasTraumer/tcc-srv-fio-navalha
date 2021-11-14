@@ -7,26 +7,23 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import tcc.cotuca.fiodanavalha.exception.CadastroInvalidoException;
 import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
-public abstract class Usuario implements UserDetails {
+public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Object id;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
@@ -44,8 +41,8 @@ public abstract class Usuario implements UserDetails {
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
 
-    public Long getId() {
-        return Long.valueOf(id);
+    public Object getId() {
+        return id;
     }
 
     public String getNome() {
@@ -146,40 +143,4 @@ public abstract class Usuario implements UserDetails {
     public Object clone () {
         return null;
     }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public String getPassword() {
-        return this.getSenha();
-    }
-
-    @Override
-    public String getUsername() {
-        return this.getEmail();
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
 }
