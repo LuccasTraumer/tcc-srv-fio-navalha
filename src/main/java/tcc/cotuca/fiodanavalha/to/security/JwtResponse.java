@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.to.auth;
+package tcc.cotuca.fiodanavalha.to.security;
 
 import java.io.Serializable;
 

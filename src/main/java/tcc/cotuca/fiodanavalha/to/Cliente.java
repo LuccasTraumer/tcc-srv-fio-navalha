@@ -1,9 +1,9 @@
 package tcc.cotuca.fiodanavalha.to;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import tcc.cotuca.fiodanavalha.exception.FioDaNavalhaException;
 import tcc.cotuca.fiodanavalha.to.plano.PlanoContratado;
 
 import javax.persistence.Entity;
@@ -15,7 +15,6 @@ import java.util.Objects;
 @Table(name = "cliente")
 @Slf4j
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = false)
 @ToString
 public class Cliente extends Usuario {
     private BigDecimal saldoCliente;
@@ -31,6 +30,11 @@ public class Cliente extends Usuario {
         this.reputacao = 0.0;
         this.endereco = new Endereco();
         this.cpf = "";
+    }
+
+    public Cliente(String email, String senha) {
+        this.setEmail(email);
+        this.setSenha(senha);
     }
 
     public BigDecimal getSaldoCliente() {
@@ -85,12 +89,57 @@ public class Cliente extends Usuario {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cliente)) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(getSaldoCliente(), cliente.getSaldoCliente()) && Objects.equals(getNotaCliente(), cliente.getNotaCliente()) && Objects.equals(getReputacao(), cliente.getReputacao()) && Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) && Objects.equals(getEndereco(), cliente.getEndereco()) && Objects.equals(getCpf(), cliente.getCpf());
+        var cliente = (Cliente) o;
+        return Objects.equals(
+                getSaldoCliente(), cliente.getSaldoCliente()) &&
+                Objects.equals(getNotaCliente(), cliente.getNotaCliente()) &&
+                Objects.equals(getReputacao(), cliente.getReputacao()) &&
+                Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) &&
+                Objects.equals(getEndereco(), cliente.getEndereco()) &&
+                Objects.equals(getCpf(), cliente.getCpf());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSaldoCliente(), getNotaCliente(), getReputacao(), getPlanoContratado(), getEndereco(), getCpf());
+        return Objects.hash(getSaldoCliente(), getNotaCliente(),
+                        getReputacao(), getPlanoContratado(),
+                        getEndereco(), getCpf());
+    }
+
+    public Cliente (Cliente cliente) throws FioDaNavalhaException {
+        if (cliente == null)
+            throw new FioDaNavalhaException("Modelo para copia está ausente!");
+
+        this.mudarAtributosUsuario(cliente);
+        this.saldoCliente = cliente.saldoCliente;
+        this.notaCliente = cliente.notaCliente;
+        this.reputacao = cliente.reputacao;
+        this.planoContratado = cliente.planoContratado;
+        this.endereco = cliente.endereco;
+        this.cpf = cliente.cpf;
+
+    }
+
+    @Override
+    public Object clone () {
+        Cliente ret = null;
+
+        try {
+            ret = new Cliente(this);
+        } catch (Exception erro) {
+            System.out.println(erro.getMessage());
+        }
+        return ret;
+    }
+
+    private void mudarAtributosUsuario(Cliente barbearia) {
+        this.setNome(barbearia.getNome());
+        this.setEmail(barbearia.getEmail());
+        this.setDescricao(barbearia.getDescricao());
+        this.setTelefone(barbearia.getTelefone());
+        this.setFotoPerfil(barbearia.getFotoPerfil());
+        this.setSenha(barbearia.getSenha());
+        this.setDataNascimento(barbearia.getDataNascimento());
+        this.setDataCadastro(barbearia.getDataCadastro());
     }
 }

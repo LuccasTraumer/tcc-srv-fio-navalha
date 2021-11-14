@@ -20,7 +20,7 @@ public class BarbeariaGatewayImpl implements BarbeariaGateway {
     }
 
     @Override
-    public Optional<Barbearia> encontrarPorId(String id) {
+    public Optional<Barbearia> encontrarPorId(Long id) {
         return barbeariaRepository.findById(id);
     }
 
@@ -35,7 +35,17 @@ public class BarbeariaGatewayImpl implements BarbeariaGateway {
     }
 
     @Override
-    public void deletarBarbearia(String id) {
+    public void deletarBarbearia(Long id) {
         barbeariaRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Barbearia> buscarPorEmail(String email) {
+        return barbeariaRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<Barbearia> buscarPorTelefone(String telefone) {
+        return barbeariaRepository.findByTelefone(telefone);
     }
 }

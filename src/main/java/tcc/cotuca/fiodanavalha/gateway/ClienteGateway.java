@@ -7,8 +7,10 @@ import java.util.Optional;
 
 public interface ClienteGateway {
     List<Cliente> buscarTodosCliente();
-    Optional<Cliente> buscarPorId(String id);
+    Optional<Cliente> buscarPorId(Long id);
     Cliente inserirCliente(Cliente clienteVarejo);
     Cliente editarCliente(Cliente clienteVarejo);
-    void deletarCliente(String id);
+    void deletarCliente(Long id);
+    Optional<Cliente> buscarPorEmail(String email);
+    Optional<Cliente> buscarPorTelefone(String telefone);
 }

@@ -7,8 +7,11 @@ import java.util.Optional;
 
 public interface BarbeariaGateway {
     List<Barbearia> buscarTodasBarbearias();
-    Optional<Barbearia> encontrarPorId(String id);
+    Optional<Barbearia> encontrarPorId(Long id);
     Barbearia inserirBarbearia(Barbearia clienteVarejo);
     Barbearia editarBarbearia(Barbearia clienteBarbearia);
-    void deletarBarbearia(String id);
+    void deletarBarbearia(Long id);
+    Optional<Barbearia> buscarPorEmail(String email);
+    Optional<Barbearia> buscarPorTelefone(String telefone);
+
 }
