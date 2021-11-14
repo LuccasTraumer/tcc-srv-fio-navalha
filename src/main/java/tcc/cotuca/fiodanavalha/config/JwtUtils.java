@@ -13,56 +13,51 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+
 @Component
 public class JwtUtils implements Serializable {
     private static final long serialVersionUID = -2550185165626007488L;
     public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
 
     @Value("${jwt.secret}")
-    private String secret;
+    private static String secret;
 
-    public String getUsernameFromToken(String token) {
+    public static String pegarUsernameToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    //retorna expiration date do token jwt
-    public Date getExpirationDateFromToken(String token) {
+    public static Date pegarDataExpiracaoToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    public static  <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
 
     }
 
-    //para retornar qualquer informação do token nos iremos precisar da secret key
-    private Claims getAllClaimsFromToken(String token) {
+    private static Claims getAllClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 
-    //check if the token has expired
-    private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
+    private static Boolean tokenEstaExpirado(String token) {
+        final Date expiration = pegarDataExpiracaoToken(token);
         return expiration.before(new Date());
     }
 
-    //gera token para user
-    public String generateToken(UserDetails userDetails) {
+    public static String gerarToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername());
+        return efetuarGeracaoToken(claims, userDetails.getUsername());
     }
 
-    //Cria o token e devine tempo de expiração pra ele
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
+    private static String efetuarGeracaoToken(Map<String, Object> claims, String subject) {
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
-    //valida o token
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+    public static Boolean validarToken(String token, UserDetails userDetails) {
+        final String username = pegarUsernameToken(token);
+        return (username.equals(userDetails.getUsername()) && !tokenEstaExpirado(token));
     }
 }

@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.service.auth;
+package tcc.cotuca.fiodanavalha.service.security;
 
 import java.util.ArrayList;
 import java.util.List;

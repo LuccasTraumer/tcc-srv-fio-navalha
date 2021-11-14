@@ -23,17 +23,17 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 
 @Component
-public class JwtRequestFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAutenticarFilter extends UsernamePasswordAuthenticationFilter {
     @Value("${tempoExpiracao}")
     private int TOKEN_EXPIRACAO;
 
     @Value("${senha_unica_jwt}")
-    private String TOKEN_SENHA;
+    public static String TOKEN_SENHA;
 
     private final AuthenticationManager authenticationManager;
 
 
-    public JwtRequestFilter(AuthenticationManager authenticationManager) {
+    public JWTAutenticarFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 

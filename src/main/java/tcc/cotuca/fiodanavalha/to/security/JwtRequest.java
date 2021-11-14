@@ -1,4 +1,4 @@
-package tcc.cotuca.fiodanavalha.to.auth;
+package tcc.cotuca.fiodanavalha.to.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import tcc.cotuca.fiodanavalha.to.Usuario;
