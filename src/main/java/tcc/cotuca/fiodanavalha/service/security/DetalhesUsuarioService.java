@@ -8,15 +8,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import tcc.cotuca.fiodanavalha.gateway.impl.BarbeariaGatewayImpl;
 import tcc.cotuca.fiodanavalha.gateway.impl.ClienteGatewayImpl;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 import tcc.cotuca.fiodanavalha.to.Usuario;
 
-@Service
-public class JwtUserDetailsService implements UserDetailsService {
+@Component
+public class DetalhesUsuarioService implements UserDetailsService {
 
     @Autowired
     private ClienteGatewayImpl clienteGateway;
@@ -26,7 +26,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario usuario = buscarUsuario(email);
+        var usuario = buscarUsuario(email);
 
         if (usuario != null) {
             return new User(email, usuario.getSenha(),

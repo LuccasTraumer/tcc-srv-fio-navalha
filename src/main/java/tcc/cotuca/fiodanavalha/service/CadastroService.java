@@ -4,16 +4,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import tcc.cotuca.fiodanavalha.exception.CadastroInvalidoException;
 import tcc.cotuca.fiodanavalha.gateway.BarbeariaGateway;
 import tcc.cotuca.fiodanavalha.gateway.ClienteGateway;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 import tcc.cotuca.fiodanavalha.to.Usuario;
+import static tcc.cotuca.fiodanavalha.utils.ValidarUsuario.*;
 
-import java.time.LocalDate;
 import java.util.Map;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -30,97 +33,62 @@ public class CadastroService {
     @Autowired
     private BarbeariaGateway barbeariaGateway;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public HttpStatus cadastrarCliente(Map<String, String> headers, Cliente cliente) {
+        cliente.setSenha(passwordEncoder.encode(cliente.getPassword()));
         logger.info("Cadastrando Cliente {0}", cliente);
 
-        if(!usuarioValido(cliente))
+        if(!USUARIO_VALIDO(cliente))
             throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
 
-        Cliente clone = (Cliente) gerarUsuario(cliente);
+        Cliente clone = (Cliente) GERAR_USUARIO(cliente);
 
 //        clienteGateway.inserirCliente(clone);
         return CREATED;
     }
 
     public HttpStatus cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
+        barbearia.setSenha(passwordEncoder.encode(barbearia.getPassword()));
         logger.info("Cadastrando Barbearia {0}", barbearia);
 
-        if(!usuarioValido(barbearia))
+        if(!USUARIO_VALIDO(barbearia))
             throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
 
-        Barbearia clone = (Barbearia) gerarUsuario(barbearia);
+        Barbearia clone = (Barbearia) GERAR_USUARIO(barbearia);
 
         barbeariaGateway.inserirBarbearia(clone);
         return CREATED;
     }
 
-    public HttpStatus cadastrarBarbeiro(Map<String, String> headers, Barbearia barbearia) {
-        logger.info("Cadastrando Barbearia {0}", barbearia);
+    public HttpStatus cadastrarBarbeiro(Map<String, String> headers, Barbearia barbeiro) {
+        barbeiro.setSenha(passwordEncoder.encode(barbeiro.getPassword()));
+        logger.info("Cadastrando Barbearia {0}", barbeiro);
 
-        if(!usuarioValido(barbearia))
-            throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbearia + " Invalidos");
+        if(!USUARIO_VALIDO(barbeiro))
+            throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbeiro + " Invalidos");
 
         return CREATED;
     }
 
-    private boolean usuarioValido(Usuario usuario) {
-        boolean isValid = true;
-        if(usuario.getClass().equals(Cliente.class)) {
-            isValid = ((Cliente) usuario).getSaldoCliente() != null &&
-            ((Cliente) usuario).getNotaCliente() != null &&
-            ((Cliente) usuario).getReputacao() != null &&
-            ((Cliente) usuario).getEndereco() != null &&
-            ((Cliente) usuario).getNome() != null &&
-            ((Cliente) usuario).getCpf() != null &&
-            (((Cliente) usuario).getEmail() != null ||
-            ((Cliente) usuario).getTelefone() != null) &&
-            ((Cliente) usuario).getFotoPerfil() != null &&
-            ((Cliente) usuario).getSenha() != null &&
-            ((Cliente) usuario).getDataNascimento() != null;
-        } else if(usuario.getClass().equals(Barbearia.class)) {
-            isValid = ((Barbearia) usuario).getEndereco() != null &&
-            ((Barbearia) usuario).getNome() != null &&
-            ((Barbearia) usuario).getCnpj() != null &&
-            (((Cliente) usuario).getEmail() != null ||
-            ((Cliente) usuario).getTelefone() != null) &&
-            ((Barbearia) usuario).getFotoPerfil() != null &&
-            ((Barbearia) usuario).getSenha() != null &&
-            ((Barbearia) usuario).getDataNascimento()!= null;
-        }
-        return isValid;
-    }
+    public ResponseEntity<Boolean> validarSenha(@RequestParam String login,
+                                                @RequestParam String password) {
 
-    private Usuario gerarUsuario(Usuario usuario) {
-        Usuario clone = null;
-        if(usuario.getClass().equals(Cliente.class)) {
-            clone = new Cliente();
-            ((Cliente) clone).setSaldoCliente(((Cliente) usuario).getSaldoCliente());
-            ((Cliente) clone).setNotaCliente(((Cliente) usuario).getNotaCliente());
-            ((Cliente) clone).setReputacao(((Cliente) usuario).getReputacao());
-            ((Cliente) clone).setEndereco(((Cliente) usuario).getEndereco());
-            ((Cliente) clone).setNome(((Cliente) usuario).getNome());
-            ((Cliente) clone).setCpf(((Cliente) usuario).getCpf());
-            ((Cliente) clone).setEmail(((Cliente) usuario).getEmail());
-            ((Cliente) clone).setTelefone(((Cliente) usuario).getTelefone());
-            ((Cliente) clone).setFotoPerfil(((Cliente) usuario).getFotoPerfil());
-            ((Cliente) clone).setSenha(((Cliente) usuario).getSenha());
-            ((Cliente) clone).setDataNascimento(((Cliente) usuario).getDataNascimento());
-            ((Cliente) clone).setDataCadastro(LocalDate.now());
-            ((Cliente) clone).generatedId(usuario);
-        } else if(usuario.getClass().equals(Barbearia.class)) {
-            clone = new Barbearia();
-            ((Barbearia) clone).getEnderecos().add(((Barbearia) usuario).getEndereco());
-            ((Barbearia) clone).setNome(((Barbearia) usuario).getNome());
-            ((Barbearia) clone).setCnpj(((Barbearia) usuario).getCnpj());
-            ((Barbearia) clone).setEmail(((Barbearia) usuario).getEmail());
-            ((Barbearia) clone).setTelefone(((Barbearia) usuario).getTelefone());
-            ((Barbearia) clone).setFotoPerfil(((Barbearia) usuario).getFotoPerfil());
-            ((Barbearia) clone).setSenha(((Barbearia) usuario).getSenha());
-            ((Barbearia) clone).setDataNascimento(((Barbearia) usuario).getDataNascimento());
-            ((Barbearia) clone).setDataCadastro(LocalDate.now());
-            ((Barbearia) clone).generatedId(usuario);
+        Usuario optUsuario =  barbeariaGateway.buscarPorEmail(login).isPresent() ? barbeariaGateway.buscarPorEmail(login).get() : null;
+        if (optUsuario == null) {
+            optUsuario = clienteGateway.buscarPorEmail(login).isPresent() ? clienteGateway.buscarPorEmail(login).get() : null;
+
+            if (optUsuario == null)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+
         }
 
-        return clone;
+        Usuario usuario = optUsuario;
+        boolean valid = passwordEncoder.matches(password, usuario.getPassword());
+
+        HttpStatus status = (valid) ? HttpStatus.OK : HttpStatus.UNAUTHORIZED;
+        return ResponseEntity.status(status).body(valid);
     }
-}
+
+ }

@@ -21,7 +21,7 @@ public class ClienteGatewayImpl implements ClienteGateway {
     }
 
     @Override
-    public Optional<Cliente> buscarPorId(String id) {
+    public Optional<Cliente> buscarPorId(Long id) {
         return clienteRepository.findById(id);
     }
 
@@ -37,7 +37,17 @@ public class ClienteGatewayImpl implements ClienteGateway {
     }
 
     @Override
-    public void deletarCliente(String id) {
+    public void deletarCliente(Long id) {
         clienteRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Cliente> buscarPorEmail(String email) {
+        return clienteRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<Cliente> buscarPorTelefone(String telefone) {
+        return clienteRepository.findByTelefone(telefone);
     }
 }

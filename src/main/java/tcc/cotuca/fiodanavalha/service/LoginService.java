@@ -3,82 +3,69 @@ package tcc.cotuca.fiodanavalha.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import tcc.cotuca.fiodanavalha.config.JwtUtils;
 import tcc.cotuca.fiodanavalha.exception.LoginException;
 import tcc.cotuca.fiodanavalha.gateway.impl.BarbeariaGatewayImpl;
 import tcc.cotuca.fiodanavalha.gateway.impl.ClienteGatewayImpl;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
 import tcc.cotuca.fiodanavalha.to.Usuario;
+import tcc.cotuca.fiodanavalha.to.login.UserRequest;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
+
 
 @Component
 @Service
 public class LoginService {
     Logger logger = LoggerFactory.getLogger(LoginService.class);
+
     @Autowired
     private ClienteGatewayImpl clienteGateway;
 
     @Autowired
     private BarbeariaGatewayImpl barbeariaGateway;
 
-    public Usuario efetuarLogin(Usuario usuario) {
+    public ResponseEntity<HttpStatus> efetuarLogin(UserRequest usuario) {
         logger.info("Usuario à efetuar Login: {}", usuario);
 
-        if(usuarioCadastrado(usuario)) {
-            pegarUsuario(usuario);
-            return null;
+        var usuarioBancoDados = buscarUsuario(usuario);
+        if(usuarioBancoDados != null) {
+            var jwtUser = JwtUtils.gerarToken((UserDetails) usuarioBancoDados);
+            var headers = new HttpHeaders();
+            headers.set("jwtUser", jwtUser);
+            return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
         } else {
             throw new LoginException("Usuario ou senha invalidos!");
         }
     }
 
-    private boolean usuarioCadastrado(Usuario usuario) {
-        var usuarioCadastrado = new AtomicBoolean(false);
-        if (isBarbearia(usuario)) {
-            List<Barbearia> listaBarbearia = barbeariaGateway.buscarTodasBarbearias();
+    private Usuario buscarUsuario(Usuario usuario) {
+        AtomicReference<Usuario> user = new AtomicReference<>();
 
-            listaBarbearia.forEach(item -> {
-                if (item.getEmail().equals(usuario.getEmail()) && item.getSenha().equals(usuario.getSenha()))
-                    usuarioCadastrado.set(true);
-            });
-        } else {
+        List<Barbearia> listaBarbearia = barbeariaGateway.buscarTodasBarbearias();
+
+        listaBarbearia.forEach(item -> {
+            if (item.getEmail().equals(usuario.getEmail()) && item.getSenha().equals(usuario.getSenha()))
+                user.set(item);
+        });
+
+        if(user.get() == null) {
             List<Cliente> listaCliente = clienteGateway.buscarTodosCliente();
 
             listaCliente.forEach(item -> {
                 if (item.getEmail().equals(usuario.getEmail()) && item.getSenha().equals(usuario.getSenha()))
-                    usuarioCadastrado.set(true);
+                    user.set(item);
             });
         }
-        return usuarioCadastrado.get();
-    }
 
-    private Usuario pegarUsuario(Usuario usuario) {
-        Usuario usuarioCadastrado = null;
-        if (isBarbearia(usuario)) {
-            List<Barbearia> listaBarbearia = barbeariaGateway.buscarTodasBarbearias();
-
-            while(listaBarbearia.iterator().hasNext()) {
-                if(listaBarbearia.iterator().next().getEmail().equals(usuario.getEmail()) &&
-                        listaBarbearia.iterator().next().getSenha().equals(usuario.getSenha()))
-                        usuarioCadastrado = listaBarbearia.iterator().next();
-            }
-        } else {
-            List<Cliente> listaCliente = clienteGateway.buscarTodosCliente();
-
-            while(listaCliente.iterator().hasNext()) {
-                if(listaCliente.iterator().next().getEmail().equals(usuario.getEmail()) &&
-                        listaCliente.iterator().next().getSenha().equals(usuario.getSenha()))
-                    usuarioCadastrado = listaCliente.iterator().next();
-            }
-        }
-        return usuarioCadastrado;
-    }
-
-    private boolean isBarbearia(Usuario usuario) {
-        return usuario.getClass().equals(Barbearia.class);
+        return user.get();
     }
 }

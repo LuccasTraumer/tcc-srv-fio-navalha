@@ -26,6 +26,7 @@ public class CadastroController {
     @PostMapping(value = "cliente")
     public ResponseEntity<HttpStatus> cadastroCliente(final Map<String, String> headers,
                                                       @NonNull @RequestBody final Cliente cliente) {
+
         return new ResponseEntity<>(this.cadastroService.cadastrarCliente(headers, cliente));
     }
 
@@ -37,7 +38,8 @@ public class CadastroController {
 
     @PostMapping(value = "barbeiro")
     public ResponseEntity<HttpStatus> cadastroBarbeiro(final Map<String, String> headers,
-                                                        @NonNull @RequestBody final Barbearia barbearia) {
-        return new ResponseEntity<>(this.cadastroService.cadastrarBarbeiro(headers, barbearia));
+                                                        @NonNull @RequestBody final Barbearia barbeiro) {
+        return new ResponseEntity<>(this.cadastroService.cadastrarBarbeiro(headers, barbeiro));
     }
+
 }

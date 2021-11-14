@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 TCC_database.sql
 Tabelas TCC.sql
+.env
 
 ### STS ###
 .apt_generated
