@@ -34,20 +34,21 @@ public class LoginService {
     @Autowired
     private BarbeariaGatewayImpl barbeariaGateway;
 
-    public ResponseEntity<HttpStatus> efetuarLogin(UserRequest usuario) {
+    public ResponseEntity<String> efetuarLogin(UserRequest usuario) {
         logger.info("Usuario à efetuar Login: {}", usuario);
         var mapper = new ObjectMapper();
         var usuarioBancoDados = buscarUsuario(usuario);
         if(usuarioBancoDados != null) {
             var headers = new HttpHeaders();
-
+            var resp = "";
             try {
-                headers.set("jwtUser", mapper.writeValueAsString(montarResponse(usuarioBancoDados)));
+                resp = mapper.writeValueAsString(montarResponse(usuarioBancoDados));
+                headers.set("jwtUser", resp);
             } catch (JsonProcessingException e) {
                 logger.error("Erro ao tentar transformar em JSON!");
             }
 
-            return new ResponseEntity<>(headers, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(resp, headers, HttpStatus.OK);
         } else {
             throw new LoginException("Usuario ou senha invalidos!");
         }
