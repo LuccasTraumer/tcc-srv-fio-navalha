@@ -13,7 +13,6 @@ import java.util.List;
 @Entity
 @Table(name = "barbearia")
 @AllArgsConstructor
-@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @ToString
 @Data
@@ -22,8 +21,13 @@ public class Barbearia extends Usuario {
     private String especialidade;
     private List<Cabeleleiro> listaCabeleleiro;
     private List<Endereco> enderecos;
-    private Endereco endereco;
     private String cnpj;
+
+    public Barbearia() {
+        this.listaCabeleleiro = new ArrayList<>();
+        this.enderecos = new ArrayList<>();
+        this.horariosDiponiveis = new ArrayList<>();
+    }
 
     public Barbearia (Barbearia barbearia) throws FioDaNavalhaException {
         if (barbearia == null)
@@ -31,7 +35,6 @@ public class Barbearia extends Usuario {
 
         this.mudarAtributosUsuario(barbearia);
         this.especialidade = barbearia.especialidade;
-        this.endereco = barbearia.endereco;
         this.cnpj = barbearia.cnpj;
 
         this.enderecos = new ArrayList<>(barbearia.enderecos);
@@ -60,5 +63,6 @@ public class Barbearia extends Usuario {
         this.setSenha(barbearia.getSenha());
         this.setDataNascimento(barbearia.getDataNascimento());
         this.setDataCadastro(barbearia.getDataCadastro());
+        this.setEndereco(barbearia.getEndereco());
     }
 }

@@ -37,12 +37,12 @@ public class CadastroService {
 
         Cliente clone = (Cliente) GERAR_USUARIO(cliente);
 
-//        clienteGateway.inserirCliente(clone);
+        clienteGateway.inserirCliente(clone);
         return CREATED;
     }
 
     public HttpStatus cadastrarBarbearia(Map<String, String> headers, Barbearia barbearia) {
-        logger.info("Cadastrando Barbearia {0}", barbearia);
+        logger.info("Cadastrando Barbearia {}. Headers: {}", barbearia, headers);
 
         if(!USUARIO_VALIDO(barbearia))
             throw new CadastroInvalidoException("Dados para cadastro da Barbearia " + barbearia + " Invalidos");
@@ -54,7 +54,7 @@ public class CadastroService {
     }
 
     public HttpStatus cadastrarBarbeiro(Map<String, String> headers, Barbearia barbeiro) {
-        logger.info("Cadastrando Barbearia {0}", barbeiro);
+        logger.info("Cadastrando Barbearia {}. Headers: {}", barbeiro, headers);
 
         if(!USUARIO_VALIDO(barbeiro))
             throw new CadastroInvalidoException("Dados para cadastro do(a) Barbeiro(a) " + barbeiro + " Invalidos");

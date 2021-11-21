@@ -16,10 +16,13 @@ import java.util.List;
 public class HomeService {
     Logger logger = LoggerFactory.getLogger(HomeService.class);
 
+    //TODO: Buscar Lista de Pedido a serem confirmados e a lista de Horarios
     public List<HomeBarbeariaResponse> buscarListaDePedidoSolicitados(final Barbearia barbearia) {
+
         return null;
     }
 
+    //TODO: Buscar as Listas de Horarios agendados, Barbearias Visitadas e barbearias favoritas
     public List<HomeClienteResponse> buscarHomeCliente(final Cliente cliente) {
         return null;
     }

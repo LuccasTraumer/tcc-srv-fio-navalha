@@ -27,7 +27,6 @@ public class ClienteGatewayImpl implements ClienteGateway {
 
     @Override
     public Cliente inserirCliente(Cliente clienteVarejo) {
-        System.out.println(clienteVarejo);
         return clienteRepository.save(clienteVarejo);
     }
 

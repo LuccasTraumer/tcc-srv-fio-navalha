@@ -37,6 +37,8 @@ public abstract class Usuario implements Serializable {
     private String nome;
     private String descricao;
 
+
+    private Endereco endereco;
     private Object fotoPerfil;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
@@ -117,6 +119,14 @@ public abstract class Usuario implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Endereco getEndereco() {
+        return this.endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     @Override

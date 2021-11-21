@@ -21,14 +21,12 @@ public class Cliente extends Usuario {
     private Double notaCliente;
     private Double reputacao;
     private PlanoContratado planoContratado;
-    private Endereco endereco;
     private String cpf;
 
     public Cliente() {
         this.saldoCliente = new BigDecimal(0);
         this.notaCliente = 0.0;
         this.reputacao = 0.0;
-        this.endereco = new Endereco();
         this.cpf = "";
     }
 
@@ -69,14 +67,6 @@ public class Cliente extends Usuario {
         this.planoContratado = planoContratado;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public String getCpf() {
         return this.cpf;
     }
@@ -95,15 +85,13 @@ public class Cliente extends Usuario {
                 Objects.equals(getNotaCliente(), cliente.getNotaCliente()) &&
                 Objects.equals(getReputacao(), cliente.getReputacao()) &&
                 Objects.equals(getPlanoContratado(), cliente.getPlanoContratado()) &&
-                Objects.equals(getEndereco(), cliente.getEndereco()) &&
                 Objects.equals(getCpf(), cliente.getCpf());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getSaldoCliente(), getNotaCliente(),
-                        getReputacao(), getPlanoContratado(),
-                        getEndereco(), getCpf());
+                        getReputacao(), getPlanoContratado(), getCpf());
     }
 
     public Cliente (Cliente cliente) throws FioDaNavalhaException {
@@ -115,7 +103,6 @@ public class Cliente extends Usuario {
         this.notaCliente = cliente.notaCliente;
         this.reputacao = cliente.reputacao;
         this.planoContratado = cliente.planoContratado;
-        this.endereco = cliente.endereco;
         this.cpf = cliente.cpf;
 
     }
