@@ -47,4 +47,16 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(erroResponse, NOT_ACCEPTABLE);
     }
+
+    @ExceptionHandler(AutenticacaoException.class)
+    public ResponseEntity<ErroResponse> tratamentoErroAutenticacao(Exception ex, WebRequest request) {
+        ErroResponse erroResponse = new ErroResponse();
+
+        erroResponse.setTimestamp(LocalDateTime.now());
+        erroResponse.setErro(ex.getMessage());
+        erroResponse.setStatus(UNAUTHORIZED.value());
+
+        return new ResponseEntity<>(erroResponse, UNAUTHORIZED);
+    }
+
  }

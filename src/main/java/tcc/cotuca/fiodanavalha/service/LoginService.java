@@ -79,14 +79,18 @@ public class LoginService {
     private UserResponse montarResponse(Usuario usuario) {
         var userResponse = new UserResponse();
 
-        userResponse.setEmail(usuario.getEmail());
         userResponse.setId(usuario.getId());
         userResponse.setEndereco(((Cliente) usuario).getEndereco());
         userResponse.setNome(usuario.getNome());
         userResponse.setFotoPerfil(usuario.getFotoPerfil());
-        userResponse.setTelefone(usuario.getTelefone());
         userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
         userResponse.setTipoCliente(usuario.getClass());
+
+        if (usuario.getEmail().isEmpty()) {
+            userResponse.setTelefone(((Cliente) usuario).getTelefone());
+        } else {
+            userResponse.setEmail(((Cliente) usuario).getEmail());
+        }
 
         return userResponse;
     }

@@ -45,13 +45,17 @@ public class ValidarUsuario {
             ((Cliente) clone).setEndereco(((Cliente) usuario).getEndereco());
             ((Cliente) clone).setNome(((Cliente) usuario).getNome());
             ((Cliente) clone).setCpf(((Cliente) usuario).getCpf());
-            ((Cliente) clone).setEmail(((Cliente) usuario).getEmail());
-            ((Cliente) clone).setTelefone(((Cliente) usuario).getTelefone());
             ((Cliente) clone).setFotoPerfil(((Cliente) usuario).getFotoPerfil());
             ((Cliente) clone).setSenha(((Cliente) usuario).getSenha());
             ((Cliente) clone).setDataNascimento(((Cliente) usuario).getDataNascimento());
             ((Cliente) clone).setDataCadastro(LocalDate.now());
             ((Cliente) clone).generatedId(usuario);
+
+            if (usuario.getEmail().isEmpty()) {
+                ((Cliente) clone).setTelefone(((Cliente) usuario).getTelefone());
+            } else {
+                ((Cliente) clone).setEmail(((Cliente) usuario).getEmail());
+            }
         } else if(usuario.getClass().equals(Barbearia.class)) {
             clone = new Barbearia();
             ((Barbearia) clone).getEnderecos().add(usuario.getEndereco());

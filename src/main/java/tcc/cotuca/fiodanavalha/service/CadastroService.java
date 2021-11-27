@@ -29,8 +29,8 @@ public class CadastroService {
     @Autowired
     private BarbeariaGateway barbeariaGateway;
 
-    public HttpStatus cadastrarCliente(Map<String, String> headers, Cliente cliente) {
-        logger.info("Cadastrando Cliente {0}", cliente);
+    public HttpStatus cadastrarCliente(final Map<String, String> headers, final Cliente cliente) {
+        logger.info("Cadastrando Cliente {}", cliente);
 
         if(!USUARIO_VALIDO(cliente))
             throw new CadastroInvalidoException("Dados para cadastro do Cliente " + cliente + " Invalidos");
