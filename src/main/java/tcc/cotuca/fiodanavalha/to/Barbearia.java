@@ -8,8 +8,6 @@ import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 @Entity
 @Table(name = "barbearia")
 @AllArgsConstructor
@@ -48,21 +46,22 @@ public class Barbearia extends Usuario {
 
         try {
             ret = new Barbearia(this);
-        } catch (Exception erro) {
-            System.out.println(erro.getMessage());
-        }
+        } catch (Exception erro) {}
         return ret;
     }
 
     private void mudarAtributosUsuario(Barbearia barbearia) {
         this.setNome(barbearia.getNome());
-        this.setEmail(barbearia.getEmail());
         this.setDescricao(barbearia.getDescricao());
-        this.setTelefone(barbearia.getTelefone());
         this.setFotoPerfil(barbearia.getFotoPerfil());
         this.setSenha(barbearia.getSenha());
         this.setDataNascimento(barbearia.getDataNascimento());
         this.setDataCadastro(barbearia.getDataCadastro());
         this.setEndereco(barbearia.getEndereco());
+
+        if (barbearia.getEmail().isEmpty())
+            this.setTelefone(barbearia.getTelefone());
+        else
+            this.setEmail(barbearia.getEmail());
     }
 }

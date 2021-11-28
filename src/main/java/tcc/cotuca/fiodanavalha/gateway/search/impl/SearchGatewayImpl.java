@@ -10,6 +10,7 @@ import tcc.cotuca.fiodanavalha.to.Barbearia;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +61,7 @@ public class SearchGatewayImpl implements SearchGateway {
 
         var lista = listaBarbearias
                 .stream()
-                .filter(barbearia -> barbearia.getNome().contains(nome))
+                .filter(barbearia -> barbearia.getNome().toLowerCase(Locale.ROOT).contains(nome))
                 .sorted();
 
         return lista.collect(Collectors.toList());

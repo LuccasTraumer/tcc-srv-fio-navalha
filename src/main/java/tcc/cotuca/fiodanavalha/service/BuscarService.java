@@ -29,13 +29,12 @@ public class BuscarService {
         return response;
     }
 
-    public SearchResponse exibirDados(final Map<String, String> headers) {
-        var idCliente = Long.valueOf(headers.get("idCliente"));
+    public SearchResponse exibirDados(final Map<String, String> headers, final String idCliente) {
         logger.info("Efetuando busca de dados para o cliente com id: {}. Headers: {}",  idCliente, headers);
 
         SearchResponse response = new SearchResponse();
-        response.setListaBarbeariaFavorita(searchGateway.buscarListaBarbeariasFavoritasCliente(idCliente));
-        response.setListaBarbeariaFiltro(searchGateway.buscarBarbeariasVisitadasCliente(idCliente));
+        response.setListaBarbeariaFavorita(searchGateway.buscarListaBarbeariasFavoritasCliente(Long.valueOf(idCliente)));
+        response.setListaBarbeariaFiltro(searchGateway.buscarBarbeariasVisitadasCliente(Long.valueOf(idCliente)));
 
         logger.info("Response da do endpoint para o cliente: {}", response);
         return response;

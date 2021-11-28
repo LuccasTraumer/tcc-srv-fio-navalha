@@ -26,17 +26,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(erroResponse, INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErroResponse> tratamentoErroInesperado(Exception ex, WebRequest request) {
-        ErroResponse erroResponse = new ErroResponse();
-
-        erroResponse.setTimestamp(LocalDateTime.now());
-        erroResponse.setErro(ex.getMessage());
-        erroResponse.setStatus(INTERNAL_SERVER_ERROR.value());
-
-        return new ResponseEntity<>(erroResponse, INTERNAL_SERVER_ERROR);
-    }
-
     @ExceptionHandler(CadastroInvalidoException.class)
     public ResponseEntity<ErroResponse> tratamentoErroCadastro(Exception ex, WebRequest request) {
         ErroResponse erroResponse = new ErroResponse();
@@ -57,6 +46,17 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         erroResponse.setStatus(UNAUTHORIZED.value());
 
         return new ResponseEntity<>(erroResponse, UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErroResponse> tratamentoErroInesperado(Exception ex, WebRequest request) {
+        ErroResponse erroResponse = new ErroResponse();
+
+        erroResponse.setTimestamp(LocalDateTime.now());
+        erroResponse.setErro(ex.getMessage());
+        erroResponse.setStatus(INTERNAL_SERVER_ERROR.value());
+
+        return new ResponseEntity<>(erroResponse, INTERNAL_SERVER_ERROR);
     }
 
  }
