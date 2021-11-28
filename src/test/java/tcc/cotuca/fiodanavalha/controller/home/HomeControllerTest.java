@@ -48,7 +48,7 @@ class HomeControllerTest {
     @Test
     @SneakyThrows
     void quandoBuscarDadosCliente_deveRetornarSucesso() {
-        doReturn(new ArrayList<HomeClienteResponse>()).when(service).buscarHomeCliente(any());
+        doReturn(new ArrayList<HomeClienteResponse>()).when(service).buscarHomeCliente(any(), any());
 
         mockMvc.perform(
                 get(PATH_HOME + PATH_CLIENTE)
@@ -60,7 +60,7 @@ class HomeControllerTest {
     @Test
     @SneakyThrows
     void quandoBuscarDadosCliente_deveLancarExcecao() {
-        doThrow(FioDaNavalhaException.class).when(service).buscarHomeCliente(any());
+        doThrow(FioDaNavalhaException.class).when(service).buscarHomeCliente(any(), any());
 
         mockMvc.perform(
                 get(PATH_HOME + PATH_CLIENTE)
@@ -72,7 +72,7 @@ class HomeControllerTest {
     @Test
     @SneakyThrows
     void quandoBuscarDadosBarbearia_deveRetornarSucesso() {
-        doReturn(new ArrayList<HomeBarbeariaResponse>()).when(service).buscarListaDePedidoSolicitados(any());
+        doReturn(new ArrayList<HomeBarbeariaResponse>()).when(service).buscarListaDePedidoSolicitados(any(), any());
 
         mockMvc.perform(
                 get(PATH_HOME + PATH_BARBEARIA)
@@ -84,7 +84,7 @@ class HomeControllerTest {
     @Test
     @SneakyThrows
     void quandoBuscarDadosBarbearia_deveLancarExcecao() {
-        doThrow(FioDaNavalhaException.class).when(service).buscarListaDePedidoSolicitados(any());
+        doThrow(FioDaNavalhaException.class).when(service).buscarListaDePedidoSolicitados(any(), any());
 
         mockMvc.perform(
                 get(PATH_HOME + PATH_BARBEARIA)

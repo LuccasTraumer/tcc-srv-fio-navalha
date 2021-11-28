@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class SearchRequest {
-    private String idCliente;
+    private String email;
 }

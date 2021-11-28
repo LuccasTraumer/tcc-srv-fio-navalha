@@ -2,6 +2,7 @@ package tcc.cotuca.fiodanavalha.to.servico;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import javax.persistence.Id;
 
@@ -18,6 +19,7 @@ import java.time.temporal.ChronoUnit;
 @Table(name = "servico")
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class Servico implements Serializable {
     private static final long serialVersionUID = 1L;

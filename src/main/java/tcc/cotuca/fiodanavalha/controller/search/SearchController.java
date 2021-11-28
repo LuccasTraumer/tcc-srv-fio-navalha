@@ -23,7 +23,7 @@ public class SearchController {
 
     @PostMapping("/search")
     public ResponseEntity<SearchResponse> exibirDados(final Map<String, String> headers, @RequestBody SearchRequest request) {
-        return new ResponseEntity<>(service.exibirDados(headers, request.getIdCliente()), OK);
+        return new ResponseEntity<>(service.exibirDados(headers, request.getEmail()), OK);
     }
 
     @GetMapping("/search")
