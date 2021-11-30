@@ -43,7 +43,7 @@ public class LoginService {
             var resp = "";
             try {
                 resp = mapper.writeValueAsString(montarResponse(usuarioBancoDados));
-                headers.set("jwtUser", resp);
+                headers.set("jwtUser", mapper.writeValueAsString(montarHeader(usuarioBancoDados)));
             } catch (JsonProcessingException e) {
                 logger.error("Erro ao tentar transformar em JSON!");
             }
@@ -68,7 +68,7 @@ public class LoginService {
             List<Cliente> listaCliente = clienteGateway.buscarTodosCliente();
 
             listaCliente.forEach(item -> {
-                if (item.getEmail().equals(usuario.getEmail()) && item.getSenha().equals(usuario.getSenha()))
+                if (item.getEmail().trim().equals(usuario.getEmail()) && item.getSenha().equals(usuario.getSenha()))
                     user.set(item);
             });
         }
@@ -83,6 +83,24 @@ public class LoginService {
         userResponse.setEndereco(((Cliente) usuario).getEndereco());
         userResponse.setNome(usuario.getNome());
         userResponse.setFotoPerfil(usuario.getFotoPerfil());
+        userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
+        userResponse.setTipoCliente(usuario.getClass());
+
+        if (usuario.getEmail().isEmpty()) {
+            userResponse.setTelefone(((Cliente) usuario).getTelefone());
+        } else {
+            userResponse.setEmail(((Cliente) usuario).getEmail());
+        }
+
+        return userResponse;
+    }
+
+    private UserResponse montarHeader(Usuario usuario) {
+        var userResponse = new UserResponse();
+
+        userResponse.setId(usuario.getId());
+        userResponse.setEndereco(((Cliente) usuario).getEndereco());
+        userResponse.setNome(usuario.getNome());
         userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
         userResponse.setTipoCliente(usuario.getClass());
 

@@ -28,10 +28,8 @@ public abstract class Usuario implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
 
-    @Column(unique = true)
     private String email;
 
-    @Column(unique = true)
     private String telefone;
 
     private String nome;
@@ -39,7 +37,7 @@ public abstract class Usuario implements Serializable {
 
 
     private Endereco endereco;
-    private Object fotoPerfil;
+    private String fotoPerfil;
     private LocalDate dataNascimento;
     private LocalDate dataCadastro;
 
@@ -63,9 +61,9 @@ public abstract class Usuario implements Serializable {
     }
 
     public void setEmail(String email) {
-        if (email.contains(".com") || email.contains("@") || email.length() < 5)
+        if (!(email.contains(".com") || email.contains("@")) || email.length() < 5)
             throw new CadastroInvalidoException("Email invalido para criação de usuario!");
-        this.email = email;
+        this.email = email.trim();
     }
 
     public String getTelefone() {
@@ -78,11 +76,11 @@ public abstract class Usuario implements Serializable {
         this.telefone = telefone;
     }
 
-    public Object getFotoPerfil() {
+    public String getFotoPerfil() {
         return fotoPerfil;
     }
 
-    public void setFotoPerfil(Object fotoPerfil) {
+    public void setFotoPerfil(String fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
 

@@ -25,7 +25,7 @@ public class CadastroController {
     @ApiOperation("Criação de um Cliente")
     @PostMapping(value = "cliente")
     public ResponseEntity<HttpStatus> cadastroCliente(final Map<String, String> headers,
-                                                      @NonNull @RequestBody final Cliente cliente) {
+                                                      @RequestBody final Cliente cliente) {
 
         return new ResponseEntity<>(this.cadastroService.cadastrarCliente(headers, cliente));
     }
