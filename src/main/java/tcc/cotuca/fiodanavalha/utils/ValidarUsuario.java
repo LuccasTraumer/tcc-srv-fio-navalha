@@ -59,6 +59,7 @@ public class ValidarUsuario {
         } else if(usuario.getClass().equals(Barbearia.class)) {
             clone = new Barbearia();
             ((Barbearia) clone).getEnderecos().add(usuario.getEndereco());
+            ((Barbearia) clone).setEndereco(usuario.getEndereco());
             ((Barbearia) clone).setNome(usuario.getNome());
             ((Barbearia) clone).setCnpj(((Barbearia) usuario).getCnpj());
             ((Barbearia) clone).setFotoPerfil(usuario.getFotoPerfil());

@@ -15,6 +15,7 @@ import tcc.cotuca.fiodanavalha.gateway.impl.BarbeariaGatewayImpl;
 import tcc.cotuca.fiodanavalha.gateway.impl.ClienteGatewayImpl;
 import tcc.cotuca.fiodanavalha.to.Barbearia;
 import tcc.cotuca.fiodanavalha.to.Cliente;
+import tcc.cotuca.fiodanavalha.to.Endereco;
 import tcc.cotuca.fiodanavalha.to.Usuario;
 import tcc.cotuca.fiodanavalha.to.login.UserRequest;
 import tcc.cotuca.fiodanavalha.to.login.UserResponse;
@@ -80,16 +81,18 @@ public class LoginService {
         var userResponse = new UserResponse();
 
         userResponse.setId(usuario.getId());
-        userResponse.setEndereco(((Cliente) usuario).getEndereco());
+        userResponse.setEndereco((usuario).getEndereco() == null ? new Endereco() : (usuario).getEndereco());
         userResponse.setNome(usuario.getNome());
         userResponse.setFotoPerfil(usuario.getFotoPerfil());
-        userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
         userResponse.setTipoCliente(usuario.getClass());
 
+        if (usuario.getClass().equals(Cliente.class))
+            userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
+
         if (usuario.getEmail().isEmpty()) {
-            userResponse.setTelefone(((Cliente) usuario).getTelefone());
+            userResponse.setTelefone((usuario).getTelefone());
         } else {
-            userResponse.setEmail(((Cliente) usuario).getEmail());
+            userResponse.setEmail((usuario).getEmail());
         }
 
         return userResponse;
@@ -99,15 +102,16 @@ public class LoginService {
         var userResponse = new UserResponse();
 
         userResponse.setId(usuario.getId());
-        userResponse.setEndereco(((Cliente) usuario).getEndereco());
         userResponse.setNome(usuario.getNome());
-        userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
         userResponse.setTipoCliente(usuario.getClass());
 
+        if (usuario.getClass().equals(Cliente.class))
+            userResponse.setSaldoCliente(((Cliente) usuario).getSaldoCliente());
+
         if (usuario.getEmail().isEmpty()) {
-            userResponse.setTelefone(((Cliente) usuario).getTelefone());
+            userResponse.setTelefone((usuario).getTelefone());
         } else {
-            userResponse.setEmail(((Cliente) usuario).getEmail());
+            userResponse.setEmail((usuario).getEmail());
         }
 
         return userResponse;
